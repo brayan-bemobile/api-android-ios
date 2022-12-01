@@ -27,7 +27,7 @@ type ToDoService struct {
 }
 
 func (t *ToDoService) getRandomCurrency() string {
-	currencies := []string{"EUR", "USD", "GBP", "JPY", "AUD", "CAD", "CHF", "CNY", "SEK", "NZD", "MXN", "SGD", "HKD", "NOK", "KRW", "TRY", "RUB", "INR", "BRL", "ZAR"}
+	currencies := []string{"EUR", "USD", "GBP", "JPY", "AUD", "CAD", "SEK", "RUB", "INR"}
 	return currencies[rand.Intn(len(currencies))]
 }
 
@@ -50,22 +50,58 @@ func (t *ToDoService) getRandomSku() string {
 }
 
 func (t *ToDoService) listRatesInDb() []entities.Rates {
-	var rates []entities.Rates
-	var max = t.getRandomInt(3, 11)
-	for i := 1; i < max; i++ {
-		var rate entities.Rates
-		rate.From = t.getRandomCurrency()
-		rate.To = t.getRandomCurrency()
-		rate.Rate = t.getRandomFloat(MAX_RATE, MIN_RATE)
-		rates = append(rates, rate)
+	return []entities.Rates{
+		{
+			From: "EUR",
+			To:   "USD",
+			Rate: 1.04,
+		},
+		{
+			From: "USD",
+			To:   "EUR",
+			Rate: 0.96,
+		},
+		{
+			From: "GBP",
+			To:   "EUR",
+			Rate: 1.16,
+		},
+		{
+			From: "JPY",
+			To:   "USD",
+			Rate: 0.0073,
+		},
+		{
+			From: "AUD",
+			To:   "INR",
+			Rate: 55.29,
+		},
+		{
+			From: "CAD",
+			To:   "USD",
+			Rate: 0.74,
+		},
+		{
+			From: "SEK",
+			To:   "USD",
+			Rate: 0.096,
+		},
+		{
+			From: "RUB",
+			To:   "SEK",
+			Rate: 0.17,
+		},
+		{
+			From: "INR",
+			To:   "EUR",
+			Rate: 0.012,
+		},
 	}
-
-	return rates
 }
 
 func (t *ToDoService) listTransactionsInDb() []entities.Transactions {
 	var transactions []entities.Transactions
-	var max = t.getRandomInt(3, 11)
+	var max = t.getRandomInt(3, 30)
 	for i := 1; i < max; i++ {
 		var transaction entities.Transactions
 		transaction.Sku = t.getRandomSku()
