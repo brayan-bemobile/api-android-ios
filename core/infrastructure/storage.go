@@ -101,7 +101,7 @@ func (t *ToDoService) listRatesInDb() []entities.Rates {
 
 func (t *ToDoService) listTransactionsInDb() []entities.Transactions {
 	var transactions []entities.Transactions
-	var max = t.getRandomInt(3, 30)
+	var max = t.getRandomInt(10, 100)
 	for i := 1; i < max; i++ {
 		var transaction entities.Transactions
 		transaction.Sku = t.getRandomSku()
