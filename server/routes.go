@@ -9,8 +9,8 @@ func (es *EchoServer) toDoRoutes() {
 	// call the TODO HTTP Service
 	todo := app_todo.NewToDoHTTPService(es.ctx, es.db)
 
-	es.GET("/todo", todo.ListHandler)
-	es.POST("/todo/create", todo.CreateHandler)
+	es.GET("/rates", todo.ListRates)
+	es.GET("/transactions", todo.ListTransactions)
 }
 
 //func anotherRoutes()...

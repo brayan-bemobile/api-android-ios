@@ -9,8 +9,8 @@ import (
 
 // the Gateway for access to Storage
 type ToDoGateway interface {
-	CreateToDo(td *entities.ToDo) (int, entities.Response)
-	ListToDo() (int, []entities.ToDo)
+	ListRates() (int, []entities.Rates)
+	ListTransactions() (int, []entities.Transactions)
 }
 
 // The Domain Logic
@@ -19,31 +19,14 @@ type ToDoLogic struct {
 }
 
 // List ToDo
-func (t *ToDoLogic) ListToDo() (int, []entities.ToDo) {
+func (t *ToDoLogic) ListRates() (int, []entities.Rates) {
 	// Domain logic
-	return http.StatusOK, t.St.listToDoInDb()
+	return http.StatusOK, t.St.listRatesInDb()
 }
 
-// Create ToDo
-func (t *ToDoLogic) CreateToDo(td *entities.ToDo) (int, entities.Response) {
-	// Example domain logic
-	if td.Do != "Do" {
-		// Just Ok, just error message for front-end / micro-service
-		return http.StatusOK, entities.Response{
-			Message: "The do is invalid.",
-			Success: false,
-		}
-	}
-
-	// If all is ok, we can create the ToDo
-	// I can use a goroutine if the response do not need anything from the infrastructure
-	go t.St.insertToDoInDb(td)
-
-	// just make a accepted response
-	return http.StatusAccepted, entities.Response{
-		Message: "TODO successfully added.",
-		Success: true,
-	}
+func (t *ToDoLogic) ListTransactions() (int, []entities.Transactions) {
+	// Domain logic
+	return http.StatusOK, t.St.listTransactionsInDb()
 }
 
 // Constructor
