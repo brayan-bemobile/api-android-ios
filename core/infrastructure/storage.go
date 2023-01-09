@@ -102,17 +102,16 @@ func (t *ToDoService) listRatesInDb() []entities.Rates {
 func (t *ToDoService) listTransactionsInDb() []entities.Transactions {
 	var transactions []entities.Transactions
 	var max = t.getRandomInt(15, 100)
-	var maxSku = t.getRandomInt(1, 10)
 	for i := 1; i < max; i++ {
 		var sku = t.getRandomSku()
-		for i := 1; i < maxSku; i++ {
+		var maxSku = t.getRandomInt(1, 10)
+		for i := 0; i < maxSku; i++ {
 			var transaction entities.Transactions
 			transaction.Sku = sku
 			transaction.Amount = t.getRandomFloat(MAX_AMOUNT, MIN_AMOUNT)
 			transaction.Currency = t.getRandomCurrency()
 			transactions = append(transactions, transaction)
 		}
-
 	}
 
 	return transactions
